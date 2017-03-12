@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	var CLIENT_ID = "64a0b705-0799-4ae6-a8c3-2203dd6b38e5",
 	CLIENT_SECRET = "thYabTrtTZwXpjF7943MjVU",
-	REDIRECT_URL = "http://localhost",
+	REDIRECT_URL = "http://omarsilva.net/demos/note2",
 	SCOPE = "office.onenote_update wl.signin",
 	COOKIE_NAME = "Atkn";
 
