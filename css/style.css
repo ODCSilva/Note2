@@ -1,0 +1,79 @@
+html, body {
+	height: 100%;
+}
+.h-divider {
+	border-left: 1px solid rgba(200, 200, 200, 0.5);
+	margin: 0.6em 0 0.6em 0;
+}
+.navbar-item-margin {
+	margin-left: 1.0em;
+	margin-right: 1.0em;
+}
+.navbar-bg {
+	background: #7b1fa2;
+}
+.sidebar-bg {
+	background-color: #888;
+}
+#content {
+	position: absolute;
+	width: 100%;
+}
+.md-48 {
+	font-size: 32px;
+}
+.md-18 {
+	font-size: 18px;
+}
+.ws {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.c-overflow {
+	overflow-y: auto;
+}
+.white-bg {
+	background-color: #FFFFFF !important;
+}
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active {
+	color: #fff !important;
+	cursor: default;
+	background-color: #d9534f !important;
+}
+.editable {
+	border: 1px solid #d9534f !important;
+}
+.hidden {
+	display: none !important;
+}
+.navbar-inverse .navbar-nav .nav-link {
+	color: rgba(255,255,255,.75);
+}
+.navbar-inverse .navbar-nav .nav-link a:hover{
+	color: rgba(255,255,255,1);
+}
+.splash {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+	background-color: #d9534f;
+	z-index:99999999 !important;
+}
+.splash-card {
+	position: absolute !important;
+	top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+	margin: auto;
+}
+.splash-logo {
+	height: 300px;
+	margin-top: 32px;
+}
+#loginButton {
+	margin-top: 32px;
+}

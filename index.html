@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<title>Note²</title>
+
+	<!--  Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<!-- Google Material Icon Font -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Toastr -->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+	<!-- Local styles -->
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class='bg-faded'>
+
+	<div class="splash hidden" id="splashScreen">
+		<div class="bg-danger splash-card h-50 w-25">
+			<div class="text-center">
+				<img src="images/note2.svg" alt="Note2 Logo" class='splash-logo'>
+			</div>
+			<div class="text-center">
+				<button class="btn btn btn-outline-secondary btn-block" id="loginButton">Login with Microsoft Live</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Navbar -->
+	<nav class="navbar fixed-top navbar-toggleable-sm navbar-inverse bg-danger" id="mainNav">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<h1 class="navbar-brand mb-0" id="documentTitle"></h1>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item text-center navbar-item-margin">
+					<a class="nav-link" href="#" id="addButton">
+						<div>
+							<i class="material-icons">note_add</i>
+						</div>
+						<div>
+							Add
+						</div>
+					</a>
+				</li>
+				<li class="nav-item text-center navbar-item-margin">
+					<a class="nav-link disabled" href="#" id="saveButton">
+						<div>
+							<i class="material-icons">save</i>
+						</div>
+						<div>
+							Save
+						</div>
+					</a>
+				</li>
+				<li class="nav-item text-center navbar-item-margin">
+					<a class="nav-link disabled" href="#" id="editButton">
+						<div>
+							<i class="material-icons">mode_edit</i>
+						</div>
+						<div>
+							Edit
+						</div>
+					</a>
+				</li>
+				<li class="h-divider navbar-item-margin"></li>
+				<li class="nav-item text-center navbar-item-margin">
+					<a class="nav-link disabled" href="#" id="deleteButton">
+						<div>
+							<i class="material-icons">delete</i>
+						</div>
+						<div>
+							Delete
+						</div>
+					</a>
+				</li>
+				<li class="nav-item dropdown text-center mt-2">
+					<a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="material-icons md-48">more_vert</i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="#" id="about_link">About</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#" id="signout">Sign Out</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- About Modal -->
+	<div class="modal fade" id="about">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">About Note<sup>2</sup></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Author: Omar Silva</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Generic Modal -->
+	<div class="modal fade" id="genericModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete note prompt modal -->
+	<div class="modal fade" id="deleteNoteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="title"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="body">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-danger btn-ok" data-dismiss="modal">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Discard changes modal -->
+	<div class="modal fade" id="discardChangesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="title">Discard changes?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="body">
+					The current note has unsaved changes. Would you like to discard them?
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="nextNoteId" />
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-danger btn-ok" data-dismiss="modal">Discard Changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Note title dialog -->
+	<div class="modal fade" id="newFileNameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Note title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class='form-group'>
+						<label for="titleInput">Enter the title of your new note</label>
+						<input type="text" class="form-control" id="titleInput" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-ok">Save Note</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Main Container -->
+	<div class="container-fluid" id="content">
+		<div class="row h-100">
+			<!-- Note List -->
+			<div class="col-md-2 h-100" id="side">
+				<div class="input-group mt-4">
+					<input type="search" class="form-control" name="search" id="search" value="" placeholder="Search for Notes">
+					<i class="input-group-addon material-icons">search</i>
+				</div>
+				<div class="mt-4 mb-4 c-overflow">
+					<ul class="nav nav-pills flex-column red-pill" id="notes">
+					</ul>
+				</div>
+			</div>
+
+			<!-- Note Contents -->
+			<div class="col-md-10 pt-4 pb-4 h-100" id="noteContent">
+				<textarea></textarea>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap & jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+	integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<!-- Toastr -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<!-- Local scripts -->
+	<script src="js/ckeditor/ckeditor.js"></script>
+	<script src="js/ckeditor/adapters/jquery.js"></script>
+	<script src="js/js.cookie.js"></script>
+	<script src="js/jquery.ba-bbq.min.js"></script>
+	<script src="js/auth.js"></script>
+	<script src="js/notes.js"></script>
+	<script src="js/spin.min.js"></script>
+	<script src="js/jquery.spin.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
